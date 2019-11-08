@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    寄生继承+寄生组合式继承
+</body>
+
+</html>
+<script>
+    // 寄生继承
+    var person = {
+        name: "cdd"
+    }
+    function object(o) {
+        var clone = Object(o);
+        // 增强对象
+        clone.sayHello = function () {
+            return this.name;
+        }
+        return clone;
+    }
+    // var per = object(person)
+    // console.log(per)
+
+
+
+    function Father() {
+        this.property = true;
+    }
+    Father.prototype.getFatherValue = function () {
+        return this.property;
+    }
+    function Son() {
+        this.sonProperty = false;
+    }
+
+
+    //没有调用superClass构造函数,因此避免了在subClass.prototype上面创建不必要,多余的属性. 
+    // son实例不拥有Father的实例属性
+    function extent(subClass, superClass) {
+        var prototype = object(superClass.prototype);// 创建对象
+        console.log(prototype)
+        prototype.constructor = subClass;// 增强对象
+        subClass.prototype = prototype;
+    }
+
+    function extentTo(subClass, superClass) {
+        var F = function () { };
+        F.prototype = superClass.prototype;
+        subClass.prototype = new F();
+        subClass.prototype.constructor = subClass;
+
+        subClass.superClass = superClass.prototype;
+        if (superClass.prototype.constructor == Object.prototype.constructor) {
+            superClass.prototype.constructor = superClass
+        }
+    }
+
+
+
+
+    // extent(Son, Father)
+    extentTo(Son, Father)
+    var father = new Father();
+    var son = new Son();
+    console.log(father)
+    console.log(son)
+    console.log(Son.prototype.isPrototypeOf(son))
+
+
+
+
+
+</script>

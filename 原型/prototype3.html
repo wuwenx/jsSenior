@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    组合继承
+</body>
+
+</html>
+<script>
+    function Father(name) {
+        this.name = name;
+        this.color = ['red', 'black']
+    }
+    Father.prototype.sayName = function () {
+        return this.name;
+    }
+
+    function Son(name, age) {
+        // 继承实例属性，实例的方法并没有继承 第一次调用
+        Father.call(this, name);
+        this.age = age;
+    }
+    console.log(new Father())
+    console.log(new Son())
+    // 继承父类的方法
+    // 第二次调用
+    Son.prototype = new Father();
+    Son.prototype.sayAge = function () {
+        return this.age;
+    }
+    console.log(new Father())
+    console.log(new Son())
+
+    var instance1 = new Son('wuwx', 19)
+    instance1.color.push('pick')
+    instance1.sayName();
+    instance1.sayName();
+
+    var instance2 = new Son('yll', 17)
+    instance2.color.push('yellow')
+    instance2.sayName();
+    instance2.sayName();
+
+    console.log(instance1)
+    console.log(instance2)
+    //组合继承其实调用了两次父类构造函数, 造成了不必要的消耗
+</script>

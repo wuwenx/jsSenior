@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    new 运算符
+</body>
+
+</html>
+<script>
+    function F() {
+        this.name = "eeee"
+    }
+    F.prototype.getName = function () {
+        return this.name;
+    }
+
+
+    var obj = { age: 12 };
+    obj._proto_ = F.prototype;
+    F.call(obj)
+    console.log(new F())
+    console.log(obj)
+
+    function extentTo(subClass, superClass) {
+        var F = function () { };
+        F.prototype = superClass.prototype;
+        subClass.prototype = new F();
+        subClass.prototype.constructor = subClass;
+
+        subClass.superClass = superClass.prototype;
+        if (superClass.prototype.constructor == Object.prototype.constructor) {
+            superClass.prototype.constructor = superClass
+        }
+    }
+
+
+    function Animal(name) {
+        this.name = name
+        this.type = ['crawl', 'amphibious']
+    }
+    Animal.prototype.getName = function () {
+        return this.name
+    }
+
+    function Pig(name, color) {
+        Animal.call(this, name)
+        this.color = color;
+    }
+    extentTo(Pig, Animal);
+    Pig.prototype.sayColor = function () {
+        return this.color;
+    }
+    var instance1 = new Pig("Pig", 'red');
+    instance1.type.push("black");
+    console.log(instance1.type);
+    instance1.getName();
+    instance1.sayColor();
+
+    var instance1 = new Pig("zhai", 'black');
+    console.log(instance1.type);
+    instance1.getName();
+    instance1.sayColor();
+
+</script>

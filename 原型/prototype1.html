@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    基本继承
+</body>
+
+</html>
+<script>
+    function Father() {
+        this.property = true;
+    }
+    Father.prototype.getFatherValue = function () {
+        return this.property;
+    }
+    function Son() {
+        this.sonProperty = false;
+    }
+    Son.prototype = new Father(); //Son.prototype被重写,导致Son.prototype.constructor也一同被重写
+    Son.prototype.getSonValue = function () {
+        return this.sonProperty;
+    }
+    var instance = new Son();
+    console.log(new Father);
+    console.log(new Son);
+    console.log(instance);
+    console.log(instance instanceof Son)
+    console.log(instance instanceof Father)
+    console.log(instance instanceof Object)
+
+    console.log(Object.prototype.isPrototypeOf(instance));//true
+    console.log(Father.prototype.isPrototypeOf(instance));//true
+    console.log(Son.prototype.isPrototypeOf(instance));//true
+    
+ // 原型链并非十分完美, 它包含如下两个问题.
+ // 问题一: 当原型链中包含引用类型值的原型时,该引用类型值会被所有实例共享;
+ // 问题二: 在创建子类型(例如创建Son的实例)时,不能向超类型(例如Father)的构造函数中传递参数.
+</script>

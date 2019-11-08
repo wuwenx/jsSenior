@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    借用构造函数实现继承
+</body>
+
+</html>
+<script>
+    function Father() {
+        this.color = ['red', 'black', 'yellow']
+    }
+    Father.prototype.getColor = function () {
+        return this.color;
+    }
+    function Son() {
+        // 继承Father，且向父类传递参数
+        // 但是在Father中定义的方法子类没办法访问
+        Father.call(this);
+    }
+    console.log(new Father())
+    console.log(new Son())
+
+    var instance1 = new Son();
+    instance1.color.push('pick');
+
+    var instance2 = new Son();
+    console.log(instance1)
+    console.log(instance2)
+</script>

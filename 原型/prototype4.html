@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    原型继承
+</body>
+
+</html>
+<script>
+    function object(o) {
+        function F() { };
+        F.prototype = o;
+        return new F();
+    }
+    var person = {
+        friends: ['wwx', 'zzj', 'mzl'],
+        name:"wuwx"
+    }
+
+    // var authorPerson = object(person)
+    // authorPerson.friends.push('zyn');
+    // console.log(authorPerson)
+
+    // var yetAnotherPerson = object(person);
+    // yetAnotherPerson.friends.push("Style");
+    // console.log(yetAnotherPerson)
+    var authorPerson = Object.create(person)
+    authorPerson.friends.push('zyn');
+    console.log(authorPerson)
+    // 每个属性都是通过自己的描述符定义的.以这种方式指定的任何属性都会覆盖原型对象上的同名属性
+    // 增加同名属性覆盖原型属性
+    var yetAnotherPerson = Object.create(person, {
+        friends: {
+            value: '123213'
+        }
+    });
+    // yetAnotherPerson.friends.push("Style");
+    console.log(yetAnotherPerson)
+
+</script>
