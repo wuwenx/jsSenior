@@ -1,0 +1,11 @@
+{
+  "name": "wuwx",
+  "version": "1.0.0",
+  "description": "first wuwx npm",
+  "main": "math.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wuwx",
+  "license": "ISC"
+}
