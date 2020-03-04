@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <video id="video" autoplay style="widows: 480px; height: 320px;"></video>
+    <div><button id="capture">拍照</button></div>
+    <canvas id="canvas" width="480" height="320"></canvas>
+</body>
+
+</html>
+<script>
+    // if (navigator.mediaDevices.getUserMedia || navigator.getUserMedia) {
+    //     console.log("您的浏览器支持访问媒体设备");
+    // } else {
+    //     console.log("您的浏览器不支持访问媒体设备");
+    // }
+
+    function getUserMedia(constraints, success, error) {
+        if (navigator.mediaDevices.getUserMedia) {
+            // 最新的标准API 
+            navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
+        } else if (navigator.getUserMedia) {
+            // 旧版api
+            navigator.getUserMedia(constraints, success, error);
+        }
+
+    }
+    var video = document.getElementById("video");
+    var conetxt = document.getElementById("canvas").getContext('2d');
+
+    function success(stream) {
+        var url = window.url || window.webkitURL;
+        MediaStreamTrack == typeof stream.stop === 'function' ? stream : stream.getTracks()[1];
+        try {
+
+            video.src = url.createObjectURL(stream);
+            video.play();
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    function error(err) {
+        console.log("访问用户媒体设备失败", err.name, err.message)
+    }
+
+    if (navigator.mediaDevices.getUserMedia || navigator.getUserMedia) {
+        getUserMedia({ video: { width: 480, height: 320 } }, success, error)
+    } else {
+        console.log("您的浏览器不支持访问用户媒体设备")
+    }
+    document.getElementById("capture").addEventListener('click', () => {
+        conetxt.drawImage(video, 0, 0, 480, 320)
+    })
+</script>

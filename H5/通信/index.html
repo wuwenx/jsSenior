@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <span id="status"></span>
+    <span id="content"></span>
+</body>
+
+</html>
+<script>
+
+    window.addEventListener('load', () => {
+        var status = document.getElementById("status");
+        var content = document.getElementById("content");
+        var source;
+
+        function onnect() {
+            source = new EventSource("http://localhost:9898/stream");
+            source.addEventListener("message", (msg) => {
+                debugger
+                content.innerText=msg;
+            }, false)
+            source.addEventListener("open", (open) => {
+                status.innerText="连接打开了";
+            }, false)
+            source.addEventListener("error", (event) => {
+                if (event.target.readyState == EventSource.CLOSED) {
+                    source.close();
+                    status.innerText="连接关闭了";
+                } else {
+                    status.innerText="连接关闭,未知错误";
+                }
+            }, false)
+        }
+
+
+        if (window.EventSource) {
+            onnect();
+        } else {
+            status.innerText("浏览器不支持EventSource");
+        }
+
+    })
+
+</script>
