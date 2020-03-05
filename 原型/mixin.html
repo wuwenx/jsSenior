@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>混合继承（多继承）</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // mixin方法 接收一个构造函数和原型对象
+
+    var mixin = function (obj, mixins) {
+        debugger
+        var newObj = obj; // 保存构造函数等待扩展原型链
+        newObj.prototype = Object.create(obj.prototype); // 原型对象的实例赋值给新的函数原型
+        for (var key in mixins) {
+            if (mixins.hasOwnProperty(key))// 如果是对象自身的属性
+            {
+                newObj.prototype[key] = mixins[key]
+            }
+        }
+        return newObj;
+    }
+
+
+    var mixinObj = {
+        foo: function () {
+            console.log('foo');
+        }
+    }
+    var MyFunc = function () {
+        console.log('bar');
+    }
+    var NewFunc = mixin(MyFunc, mixinObj);
+    var newFunc = new NewFunc();
+
+    newFunc.foo();
+</script>

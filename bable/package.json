@@ -1,0 +1,19 @@
+{
+  "name": "wuwx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-latest": "^6.24.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel js/test.js --out-file test-compliled.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

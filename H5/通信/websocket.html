@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <span id="status"></span>
+    <span id="content"></span>
+</body>
+
+</html>
+<script>
+
+    window.addEventListener('load', () => {
+        var status = document.getElementById("status");
+        var content = document.getElementById("content");
+        var source;
+
+        function onnect() {
+            source = new WebSocket('ws://localhost:8001');
+            source.addEventListener('open', (open) => {
+                status.innerHTML = '连接打开了';
+                source.send("wwx")
+
+            }, false)
+            source.addEventListener('message', (data) => {
+                content.innerHTML = data.data;
+
+            }, false)
+            source.addEventListener('error', (err) => {
+                status.innerHTML = '连接异常关闭';
+            }, false)
+            source.addEventListener('close', (close) => {
+                status.innerHTML = '连接关闭了';
+            }, false)
+        }
+        if (window.WebSocket != undefined) {
+            onnect();
+        } else {
+            status.innerText("浏览器不支持websocket");
+        }
+
+    })
+
+</script>

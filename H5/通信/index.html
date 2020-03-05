@@ -21,10 +21,11 @@
         var source;
 
         function onnect() {
+            // 是否一起发送cook
+           // { withCredentials: true }
             source = new EventSource("http://localhost:9898/stream");
             source.addEventListener("message", (msg) => {
-                debugger
-                content.innerText=msg;
+                content.innerText=msg.data;
             }, false)
             source.addEventListener("open", (open) => {
                 status.innerText="连接打开了";
@@ -38,8 +39,6 @@
                 }
             }, false)
         }
-
-
         if (window.EventSource) {
             onnect();
         } else {

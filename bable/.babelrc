@@ -1,0 +1,11 @@
+// 配置papel 插件
+// https://babeljs.io/docs/en/plugins/
+// Object.assign新的api不会转换 需要安装babel-polyfill
+{
+    "plugins": [
+        "transform-es2015-arrow-functions" // 转换箭头函数
+    ],
+    "presets": [
+        "latest"// babel 插件集 最新的
+    ]
+}
