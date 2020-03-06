@@ -1,0 +1,27 @@
+{
+  "name": "wuwx",
+  "version": "1.0.0",
+  "description": "sss",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wuwx",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "jasmine": "^3.5.0",
+    "karma": "^4.4.1",
+    "karma-babel-preprocessor": "^8.0.1",
+    "karma-cli": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "babel-loader": "^7.1.5",
+    "jasmine-core": "^3.5.0",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^3.1.1"
+  }
+}
