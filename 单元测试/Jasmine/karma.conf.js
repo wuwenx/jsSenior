@@ -28,7 +28,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     // 预处理
     preprocessors: {
-      "test/*.js":['babel']
+      "test/*.js":['webpack','babel']
     },
 
 
