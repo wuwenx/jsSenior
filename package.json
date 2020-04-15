@@ -3,5 +3,8 @@
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "babel-loader": "^8.0.6"
+  },
+  "dependencies": {
+    "vue-cropper": "^0.5.2"
   }
 }
