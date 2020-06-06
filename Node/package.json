@@ -4,7 +4,7 @@
   "description": "first wuwx npm",
   "main": "math.js",
   "scripts": {
-    "start": "node koa.js"
+    "start": "node app.js"
   },
   "author": "wuwx",
   "license": "ISC",
